@@ -1,12 +1,12 @@
 <template>
   <div class="car-details container-fluid">
-    <div class="row mt-5">
-      <div class="col text-center">
-        <img :src="car.imgUrl" alt="" />
+    <div class="row mt-5 justify-content-center">
+      <div class="col-10 text-center">
+        <img :src="car.imgUrl" class="img-fluid rounded elevation-1" />
       </div>
-      <div class="row mt-3 justify-content-center">
+      <div class="row justify-content-center">
         <div class="col-md-8">
-          <div class="bg-white rounded elevation-1 p-3">
+          <div class="bg-white rounded-bottom elevation-1 p-3">
             <h4>{{ car.make }} - {{ car.model }} - {{ car.year }}</h4>
             <div class="d-flex align-items-center">
               <p class="m-0">
@@ -15,11 +15,7 @@
               <div class="color-swatch mx-2"></div>
             </div>
             <p>{{ car.description }}</p>
-            <!-- adding the v-if prevents the content from trying to load before creator is defined -->
-            <div class="user-tag d-flex align-items-center" v-if="car.creator">
-              <img class="rounded-pill" :src="car.creator.picture" alt="" />
-              <p class="m-0 ps-3">{{ car.creator.name }}</p>
-            </div>
+            <CreatorDetails v-if="car.creator" :creator="car.creator" />
             <!-- only render if the creatorId of the car is the person logged in -->
             <div
               v-if="car.creatorId === account.id"
@@ -39,6 +35,7 @@
           </div>
         </div>
       </div>
+      <Bids />
     </div>
   </div>
   <!-- by passing the prop the car details should be filled in -->
@@ -100,11 +97,5 @@ export default {
 <style lang="scss" scoped>
 .color-swatch {
   background-color: v-bind(carColor);
-}
-
-.user-tag {
-  & img {
-    height: 50px;
-  }
 }
 </style>

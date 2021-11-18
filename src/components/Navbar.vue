@@ -1,56 +1,10 @@
 <template>
-  <nav class="bg-success px-3 h-100">
+  <nav class="bg-success p-3 h-100 d-flex flex-column">
     <router-link class="d-flex" :to="{ name: 'Home' }">
       <img class="img-fluid" alt="logo" src="../assets/img/GregsList.svg" />
     </router-link>
-    <div id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <span>
-          <button
-            class="btn selectable text-success lighten-30 text-uppercase my-1"
-            @click="login"
-            v-if="!user.isAuthenticated"
-          >
-            Login
-          </button>
-
-          <div class="my-1" v-else>
-            <div
-              class="dropdown-toggle selectable"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              id="authDropdown"
-            >
-              <img
-                :src="user.picture"
-                alt="user photo"
-                height="40"
-                class="rounded"
-              />
-            </div>
-            <div
-              class="dropdown-menu p-0 list-group"
-              aria-labelledby="authDropdown"
-            >
-              <router-link :to="{ name: 'Account' }">
-                <div class="list-group-item list-group-item-action hoverable">
-                  Manage Account
-                </div>
-              </router-link>
-              <div
-                class="
-                  list-group-item list-group-item-action
-                  hoverable
-                  text-danger
-                "
-                @click="logout"
-              >
-                <i class="mdi mdi-logout"></i>
-                logout
-              </div>
-            </div>
-          </div>
-        </span>
+    <div class="d-flex flex-column justify-content-between flex-grow-1">
+      <ul class="navbar-nav mt-5 w-100">
         <li class="d-flex flex-column">
           <router-link
             :to="{ name: 'Cars' }"
@@ -58,22 +12,66 @@
           >
             Cars
           </router-link>
-          <!-- FIXME change to Houses -->
-          <!-- <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
+          <router-link
+            :to="{ name: 'Home' }"
+            class="btn selectable text-uppercase"
           >
             Houses
-          </router-link> -->
-          <!-- FIXME change to Jobs -->
-          <!-- <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
+          </router-link>
+          <router-link
+            :to="{ name: 'Home' }"
+            class="btn selectable text-uppercase"
           >
             Jobs
-          </router-link> -->
+          </router-link>
         </li>
       </ul>
+      <span>
+        <button
+          class="btn selectable text-success lighten-30 text-uppercase my-1"
+          @click="login"
+          v-if="!user.isAuthenticated"
+        >
+          Login
+        </button>
+
+        <div class="my-1" v-else>
+          <div
+            class="dropdown-toggle selectable"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="authDropdown"
+          >
+            <img
+              :src="account.picture"
+              alt="user photo"
+              height="40"
+              class="rounded"
+            />
+          </div>
+          <div
+            class="dropdown-menu p-0 list-group"
+            aria-labelledby="authDropdown"
+          >
+            <router-link :to="{ name: 'Account' }">
+              <div class="list-group-item list-group-item-action hoverable">
+                Manage Account
+              </div>
+            </router-link>
+            <div
+              class="
+                list-group-item list-group-item-action
+                hoverable
+                text-danger
+              "
+              @click="logout"
+            >
+              <i class="mdi mdi-logout"></i>
+              logout
+            </div>
+          </div>
+        </div>
+      </span>
     </div>
   </nav>
 </template>
@@ -86,6 +84,7 @@ export default {
   setup() {
     return {
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -117,7 +116,7 @@ a:hover {
   text-transform: uppercase;
 }
 .navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
+  border-bottom: 2px solid var(--bs-light);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

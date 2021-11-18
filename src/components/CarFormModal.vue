@@ -116,7 +116,7 @@
           >
             Close
           </button>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-success">
             {{ car.id ? "Save" : "Create" }}
           </button>
         </div>

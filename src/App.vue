@@ -1,6 +1,6 @@
 <template>
-  <main class="container-fluid d-flex">
-    <div class="row">
+  <main class="container-fluid d-flex w-100">
+    <div class="row flex-grow-1">
       <div class="col-2 p-0 h-100">
         <Navbar />
       </div>
