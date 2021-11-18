@@ -9,6 +9,9 @@
     <div class="row cars mt-3">
       <h3>My Car Bids</h3>
       <!-- TODO CarBids Here -->
+      <div v-for="bid in myBids" :key="bid.id">
+        <Car :car="bid" />
+      </div>
     </div>
   </div>
 </template>
@@ -19,18 +22,20 @@ import { AppState } from '../AppState'
 import { carsService } from '../services/CarsService'
 import { logger } from '../utils/Logger'
 import { AuthService } from '../services/AuthService'
+import { bidsService } from '../services/BidsService'
 export default {
   name: 'Account',
   setup() {
     const account = computed(() => AppState.account)
     onMounted(() => {
-      // logger.log({ AuthService })
       carsService.getAll('?creatorId=' + AuthService.userInfo.id)
+      bidsService.getBidsForAccount()
     })
 
     return {
       account,
-      cars: computed(() => AppState.cars)
+      cars: computed(() => AppState.cars),
+      myBids: computed(() => AppState.myBids)
     }
   }
 }

@@ -1,8 +1,19 @@
-// TODO
+// {
+//   id: 'Bid id'
+//   carId: 'Car id'
+//   bidderId: 'Some account Id',
+//   price: SOME NUMBER
+//   ?car: {... car data}
+//   ?bidder: {.... account data}
+// }
+
+
 class Bid {
-  constructor(bidData) {
-    this.bidId = bidData.id
-    this.bidPrice = data.price
+  constructor(data) {
+    this.bidId = data.id
+    this.accountId = data.accountId
+    this.carId = data.carId
+    this.amount = data.amount
   }
 }
 
@@ -25,7 +36,8 @@ export class CarBid extends Bid {
 export class AccountBid extends Bid {
   constructor(data) {
     super(data)
-    this.name = data.bidder.name
-    this.picture = data.bidder.picture
+    this.id = data.account.id
+    this.name = data.account.name
+    this.picture = data.account.picture
   }
 }
